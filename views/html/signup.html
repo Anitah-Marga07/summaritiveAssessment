@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signup Form</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background-color: #f3f5f7;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+      }
+
+      .signup-wrapper {
+        width: 100%;
+        max-width: 480px;
+        padding: 20px;
+      }
+
+      .form-heading {
+        font-size: 2.35rem;
+        color: #000000;
+        margin-bottom: 30px;
+        text-align: center;
+        font-weight: 400;
+      }
+
+      .custom-input {
+        border: 1px solid #5bc0be !important;
+        border-radius: 0px !important;
+        padding: 13px 16px !important;
+        font-size: 1.05rem;
+        color: #212529;
+        background-color: #ffffff;
+      }
+
+      .custom-input::placeholder {
+        color: #7a828a;
+        font-style: italic;
+        opacity: 1;
+      }
+
+      .custom-input:focus {
+        box-shadow: none !important;
+        border-color: #5bc0be !important;
+        outline: none;
+      }
+
+      .btn-custom-signup {
+        background-color: #5bc0be;
+        color: #ffffff;
+        font-size: 1.1rem;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        border: none;
+        border-radius: 4px;
+        padding: 12px 0;
+        transition: opacity 0.2s ease-in-out;
+      }
+
+      .btn-custom-signup:hover {
+        background-color: purple;
+        color: #ffffff;
+      }
+
+      .redirect-footer {
+        margin-top: 18px;
+        font-size: 0.92rem;
+        color: #72777a;
+        text-align: center;
+      }
+
+      .redirect-footer a {
+        color: #337ab7;
+        text-decoration: none;
+      }
+
+      .redirect-footer a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="signup-wrapper">
+      <h1 class="form-heading">Signup</h1>
+
+      <form autocomplete="off">
+        <div class="mb-3">
+          <input
+            type="text"
+            class="form-control custom-input"
+            id="fullName"
+            placeholder="Full Name"
+            name="fullName"
+          />
+        </div>
+
+        <div class="mb-3">
+          <input
+            type="email"
+            class="form-control custom-input"
+            id="email"
+            placeholder="Email"
+            name="email"
+          />
+        </div>
+
+        <div class="mb-3">
+          <input
+            type="tel"
+            class="form-control custom-input"
+            id="phoneNumber"
+            placeholder="Phone Number"
+            name="phoneNumber"
+          />
+        </div>
+
+        <div class="mb-3">
+          <input
+            type="password"
+            class="form-control custom-input"
+            id="password"
+            placeholder="Password"
+            name="password"
+          />
+        </div>
+
+        <div class="mb-4">
+          <input
+            type="password"
+            class="form-control custom-input"
+            id="confirmPassword"
+            placeholder="Confirm Password"
+            name="confirmPassword"
+          />
+        </div>
+
+        <button type="submit" class="btn btn-custom-signup w-100">
+          Signup
+        </button>
+      </form>
+
+      <div class="redirect-footer">
+        Have an account? - <a href="#">Login</a>
+      </div>
+    </div>
+  </body>
+</html>

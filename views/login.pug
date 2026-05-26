@@ -1,0 +1,58 @@
+doctype html
+head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title Login Form
+    link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css' rel='stylesheet')
+    link(rel="stylesheet", href="/css/signup.css")
+body
+    .login-wrapper
+        //- Check if an error flash message exists
+        if error_msg && error_msg.length > 0
+            div(style="background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; margin-bottom: 20px; font-size: 0.95rem;")
+                span= error_msg
+                button(type="button" style="background: none; border: none; color: #721c24; font-weight: bold; cursor: pointer;" onclick="this.parentElement.style.display='none'") X
+        //- Check if a success flash message exists
+        if success_msg && success_msg.length > 0
+            div(style="background-color: #00a854; color: white; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; margin-bottom: 20px; font-size: 0.95rem;")
+                span
+                | #{success_msg} – 
+                a(href='/login' style="color: white; text-decoration: underline;") Login
+                button(type="button" style="background: none; border: none; color: white; font-weight: bold; cursor: pointer;" onclick="this.parentElement.style.display='none'") X
+        h1.form-heading Login
+        form#loginForm(autocomplete='off' action='/login' method='post')
+            .mb-3
+                input#loginIdentifier.form-control.custom-input(type='text' placeholder='Email or Phone Number' name='email')
+            .mb-4
+                input#password.form-control.custom-input(type='password' placeholder='Password' name='password')
+            button.btn.btn-custom-signup.w-100(type='submit') Login
+        .redirect-footer
+            | Don&rsquo;t have an account? - 
+            a(href='/') Signup
+script.
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        const inputs = this.querySelectorAll('.custom-input');
+        let formIsValid = true;
+
+        inputs.forEach(input => {
+            // If field is completely empty or just spaces
+            if (!input.value.trim()) {
+                input.classList.add('is-invalid');
+                formIsValid = false;
+            } else {
+                input.classList.remove('is-invalid');
+            }
+        });
+        // If even one field is empty, stop the form from submitting to Node.js
+        if (!formIsValid) {
+            event.preventDefault();
+        }
+        });
+    // Clears the red border automatically as soon as the user starts typing
+    document.querySelectorAll('.custom-input').forEach(input => {
+        input.addEventListener('input', function() {
+            if (this.value.trim() !== '') {
+                this.classList.remove('is-invalid');
+            }
+        });
+    });

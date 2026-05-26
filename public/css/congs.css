@@ -1,0 +1,45 @@
+body {
+  background-color: #f3f5f7;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+.congrats-card {
+  background-color: #5bc0be;
+  color: #ffffff;
+  padding: 50px 40px;
+  border-radius: 8px;
+  text-align: center;
+  width: 100%;
+  max-width: 680px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+.congrats-heading {
+  font-weight: 700;
+  font-size: 1.6rem;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+.congrats-text {
+  font-size: 1.15rem;
+  font-weight: 400;
+  margin-bottom: 0;
+}
+.btn-proceed {
+  background-color: purple !important;
+  color: #ffffff !important;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: none !important;
+  border-radius: 4px !important;
+  padding: 12px 30px !important;
+  letter-spacing: 0.5px;
+  transition: background-color 0.2s ease-in-out;
+}
+.btn-proceed:hover {
+  background-color: #5c375c !important;
+}

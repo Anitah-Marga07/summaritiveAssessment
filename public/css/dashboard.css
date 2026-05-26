@@ -1,0 +1,130 @@
+body {
+  background-color: #f3f5f7;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  padding: 30px 15px;
+}
+
+.dashboard-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Card Elements Structure */
+.metrics-card,
+.form-card {
+  background-color: #ffffff;
+  border: 1px solid #e1e4e6;
+  border-radius: 4px;
+  padding: 24px;
+}
+
+.large-metrics {
+  padding: 40px 20px;
+}
+
+/* Text Sizing & Colors matching wireframe */
+.metrics-card h2 {
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 4px;
+}
+
+.metrics-card h3 {
+  font-size: 1.55rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.metrics-card p {
+  color: #72777a;
+  font-size: 0.95rem;
+  margin-bottom: 0;
+}
+
+/* Add Product Form elements */
+.form-title {
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: #000000;
+  margin-bottom: 24px;
+}
+
+.panel-input {
+  border: 1px solid #e1e4e6 !important;
+  border-radius: 0px !important;
+  padding: 12px 16px !important;
+  font-size: 0.95rem;
+  background-color: #ffffff;
+}
+
+.panel-input::placeholder {
+  color: #b0b5b9;
+  font-style: normal;
+}
+
+/* Upload input match */
+.upload-label {
+  border: 1px solid #e1e4e6;
+  padding: 12px 16px;
+  color: #b0b5b9;
+  font-size: 0.95rem;
+  cursor: pointer;
+  background-color: #ffffff;
+  display: inline-block;
+}
+
+/* Button UI Controls */
+.btn-save {
+  background-color: #e98033 !important;
+  color: #ffffff !important;
+  border-radius: 4px !important;
+  padding: 12px 0 !important;
+  font-weight: 700;
+  border: none !important;
+}
+
+.btn-clear {
+  background-color: #cccccc !important;
+  color: #000000 !important;
+  border-radius: 4px !important;
+  padding: 12px 0 !important;
+  font-weight: 700;
+  border: none !important;
+}
+
+/* High Contrast Inventory Table Override */
+.custom-table {
+  border: 1px solid #000000;
+  margin-top: auto;
+}
+
+.custom-table thead th {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 10px;
+  border: 1px solid #444444 !important;
+}
+
+.custom-table tbody td {
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #000000 !important;
+  font-size: 0.9rem;
+  background-color: #ffffff !important;
+}
+/* Standard input invalid color mapping tweak */
+.panel-input.is-invalid {
+  border-color: #dc3545 !important;
+  background-image: none !important; /* Removes Bootstrap's default background alert icon */
+}
+
+/* Custom indicator fallback style for the file upload label */
+.upload-label.is-invalid-file {
+  border-color: #dc3545 !important;
+  color: #dc3545 !important;
+}

@@ -1,0 +1,151 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1.0')
+        title Inventory Dashboard
+        link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css' rel='stylesheet')
+        link(rel="stylesheet", href="/css/dashboard.css")
+    body
+        .container-fluid.dashboard-container
+            .row.g-4.mb-4.align-items-start            
+                .col-12.col-lg-7.d-flex.flex-column
+                    .metrics-card.large-metrics.mb-3
+                        .row.h-100.align-items-center
+                            .col-6.border-end.text-center
+                                h2 UGX 50,000,000
+                                p Sales
+                            .col-6.text-center
+                                h2 UGX 15,000,000
+                                p Orders
+                    .row.g-3
+                        .col-12.col-sm-6
+                            .metrics-card.text-center
+                                h3.text-success UGX #{stockValue ? stockValue.toLocaleString() : 0}
+                                p In stock
+                        .col-12.col-sm-6
+                            .metrics-card.text-center
+                                h3.text-danger #{outOfStockCount || 0}
+                                p Out of stock
+                .col-12.col-lg-5
+                    .form-card
+                        h2.form-title Add Product
+                        
+                        //- Error Message Box
+                        if error_msg && error_msg.length > 0
+                            div(style="background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; margin-bottom: 20px; font-size: 0.95rem;")
+                                span= error_msg
+                                button(type="button" style="background: none; border: none; color: #721c24; font-weight: bold; cursor: pointer;" onclick="this.parentElement.style.display='none'") X
+                        
+                        //- Success Message Box (FIXED SYNTAX)
+                        if success_msg && success_msg.length > 0
+                            div(style="background-color: #00a854; color: white; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; margin-bottom: 20px; font-size: 0.95rem;")
+                                span= success_msg
+                                button(type="button" style="background: none; border: none; color: white; font-weight: bold; cursor: pointer;" onclick="this.parentElement.style.display='none'") X    
+                        
+                        form#productForm(autocomplete="off" action="/products" method="POST" enctype="multipart/form-data")
+                            .mb-2.input-group-wrapper
+                                input.form-control.panel-input(type="text" placeholder="Product Name" name="productName")
+                                small.error-feedback(style="color: #dc3545; font-size: 0.8rem; display: none; margin-top: 4px;") Invalid field
+                            .mb-2.input-group-wrapper
+                                input.form-control.panel-input(type="text" placeholder="Category" name="category")
+                                small.error-feedback(style="color: #dc3545; font-size: 0.8rem; display: none; margin-top: 4px;") Invalid field
+                            .mb-2.input-group-wrapper
+                                input.form-control.panel-input(type="number" placeholder="Price" name="unitPrice")
+                                small.error-feedback(style="color: #dc3545; font-size: 0.8rem; display: none; margin-top: 4px;") Invalid field
+                            .mb-2.input-group-wrapper
+                                input.form-control.panel-input(type="number" placeholder="Quantity" name="quantity") 
+                                small.error-feedback(style="color: #dc3545; font-size: 0.8rem; display: none; margin-top: 4px;") Invalid field  
+                            .row.g-2.mb-3
+                                .col-6.input-group-wrapper
+                                    input.form-control.panel-input(type="text" placeholder="Color" name="color")
+                                    small.error-feedback(style="color: #dc3545; font-size: 0.8rem; display: none; margin-top: 4px;") Invalid field
+                                .col-6.input-group-wrapper
+                                    label.upload-label.w-100.text-center
+                                        | Upload Image
+                                        input(type="file" name="productImage" hidden)
+                                    small.error-feedback(style="color: #dc3545; font-size: 0.8rem; display: none; margin-top: 4px;") Invalid field
+                            .row.g-2
+                                .col-6
+                                    button.btn.btn-save.w-100(type="submit") SAVE
+                                .col-6
+                                    button.btn.btn-clear.w-100(type="reset") CLEAR
+            .row
+                .col-12
+                    .table-responsive
+                        table.table.custom-table
+                            thead
+                                tr
+                                    th ID
+                                    th NAME
+                                    th CATEGORY
+                                    th PRICE (UGX)
+                                    th QUANTITY
+                            tbody
+                                if products && products.length > 0
+                                    each item in products 
+                                        tr 
+                                            td ##{item._id.toString().substring(18).toUpperCase()}
+                                            td #{item.productName} 
+                                            td #{item.category} 
+                                            td #{item.unitPrice ? item.unitPrice.toLocaleString() : '0'}
+                                            td #{item.quantity}
+                                else 
+                                    tr 
+                                        td.text-center(colspan="5") No products recorded yet!
+        script.
+            document.getElementById('productForm').addEventListener('submit', function(event) {
+                const inputs = this.querySelectorAll('.panel-input, input[type="file"]');
+                let formIsValid = true;
+                inputs.forEach(input => {
+                    const wrapper = input.closest('.input-group-wrapper');
+                    if (!wrapper) return;
+                    const errorTxt = wrapper.querySelector('.error-feedback');
+                    if (!input.value.trim()) {
+                        formIsValid = false;
+                        if(input.type === 'file') {
+                            wrapper.querySelector('.upload-label').classList.add('is-invalid-file');
+                        } else {
+                            input.classList.add('is-invalid');
+                        }
+                        if (errorTxt) errorTxt.style.display = 'block';
+                    } else {
+                        if(input.type === 'file') {
+                            wrapper.querySelector('.upload-label').classList.remove('is-invalid-file');
+                        } else {
+                            input.classList.remove('is-invalid');
+                        }
+                        if (errorTxt) errorTxt.style.display = 'none';
+                    }
+                });
+                if (!formIsValid) {
+                    event.preventDefault();
+                }
+            });
+
+            document.querySelectorAll('.panel-input').forEach(input => {
+                input.addEventListener('input', function() {
+                    if (this.value.trim() !== '') {
+                        this.classList.remove('is-invalid');
+                        const wrapper = this.closest('.input-group-wrapper');
+                        if (wrapper) {
+                            const errorTxt = wrapper.querySelector('.error-feedback');
+                            if (errorTxt) errorTxt.style.display = 'none';
+                        }
+                    }
+                });
+            });
+
+            const fileInput = document.querySelector('input[type="file"]');
+            if (fileInput) {
+                fileInput.addEventListener('change', function() {
+                    if (this.value) {
+                        const wrapper = this.closest('.input-group-wrapper');
+                        if (wrapper) {
+                            wrapper.querySelector('.upload-label').classList.remove('is-invalid-file');
+                            const errorTxt = wrapper.querySelector('.error-feedback');
+                            if (errorTxt) errorTxt.style.display = 'none';
+                        }
+                    }
+                });
+            }
