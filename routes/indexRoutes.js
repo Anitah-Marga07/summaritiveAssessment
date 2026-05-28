@@ -17,6 +17,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
+// sign up routes
 router.get("/", (req, res) => {
   res.render("signup");
 });
@@ -56,6 +57,7 @@ router.post("/", async (req, res) => {
   }
 });
 
+// login routes
 router.get("/login", (req, res) => {
   res.render("login");
 });
@@ -78,6 +80,7 @@ router.post("/login", (req, res, next) => {
   })(req, res, next);
 });
 
+// congs page route
 router.get("/congs", (req, res) => {
   if (!req.isAuthenticated()) {
     return res.redirect("/login");
@@ -85,6 +88,7 @@ router.get("/congs", (req, res) => {
   res.render("congs");
 });
 
+// dashboard routes
 router.get("/products", async (req, res) => {
   try {
     const allProducts = await Product.find({}).sort({ createdAt: -1 });

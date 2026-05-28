@@ -9,7 +9,7 @@ body {
     Arial, sans-serif;
 }
 
-.signup-wrapper {
+.signup-wrapper, .login-wrapper {
   width: 100%;
   max-width: 480px;
   padding: 20px;
@@ -80,5 +80,16 @@ body {
 .custom-input.is-invalid {
   border-color: #ff0000 !important;
   box-shadow: none !important;
-  background-image: none; 
+  background-image: none;
+}
+/* Custom Green Border for Valid Inputs */
+.custom-input.is-valid {
+  border-color: #2ec4b6 !important; 
+  box-shadow: none !important;
+}
+
+/* Optional: Clean look for focus states */
+.custom-input.is-valid:focus {
+  border-color: #2ec4b6 !important;
+  box-shadow: 0 0 0 0.25rem rgba(46, 196, 182, 0.25) !important;
 }
